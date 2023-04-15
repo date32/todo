@@ -58,4 +58,19 @@ class User extends Authenticatable
   protected $appends = [
     'profile_photo_url',
   ];
+
+  // このモデルはtodoクラスのデータを沢山持っている
+  public function todos() {
+    return $this->hasMany(todo::class);
+  }
+
+  // 削除についてのオーバーライドする
+  public function delete() {
+
+  // まずこのモデルの関連するtodoのレコードを削除する
+  $this->todos()->delete();
+
+  // このモデルのレコードを削除する
+  return parent::delete();
+}
 }
