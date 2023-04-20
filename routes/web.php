@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\OthelloController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +36,10 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+// お天気アプリ
+Route::get('/sky',[WeatherController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
+
 
 Route::get('todo/', [todoController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',)->name('index');
 Route::post('todo/store', [todoController::class, 'store'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
