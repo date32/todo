@@ -64,11 +64,18 @@ class User extends Authenticatable
     return $this->hasMany(todo::class);
   }
 
+  public function boards() {
+    return $this->hasMany(Board::class);
+  }
+
   // 削除についてのオーバーライドする
   public function delete() {
 
   // まずこのモデルの関連するtodoのレコードを削除する
   $this->todos()->delete();
+
+  // まずこのモデルの関連するboardのレコードを削除する
+  $this->boards()->delete();
 
   // このモデルのレコードを削除する
   return parent::delete();

@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeatherController;
-use App\Http\Controllers\OthelloController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,7 +40,14 @@ Route::middleware([
 // お天気アプリ
 Route::get('/sky',[WeatherController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
 
+// 掲示板アプリ
+Route::get('board', [BoardController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
+Route::post('/save-data',[BoardController::class, 'saveData'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
+Route::delete('/delete-data/{id}',[BoardController::class, 'deleteData'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
+Route::put('board/{id}', [BoardController::class, 'update'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
+Route::post('/like/{id}', [BoardController::class, 'like'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
 
+// todoアプリ
 Route::get('todo/', [todoController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',)->name('index');
 Route::post('todo/store', [todoController::class, 'store'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
 Route::post('todo/finish', [todoController::class, 'finish'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
