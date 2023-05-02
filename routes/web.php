@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\LifeController;
+use App\Http\Controllers\MathController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Foundation\Application;
@@ -37,8 +40,28 @@ Route::middleware([
     })->name('dashboard');
 });
 
+// 学習アプリ
+Route::get('/math',[StudentController::class, 'index']);
+Route::post('/math/student-create',[StudentController::class, 'create']);
+Route::delete('/math/student-delete/{id}',[StudentController::class, 'delete']);
+Route::get('/math/student/{id}',[StudentController::class, 'show']);
+Route::post('/math/student/score',[StudentController::class, 'score']);
+Route::get('/math/edit',[MathController::class, 'edit']);
+Route::get('/math/update/{id}',[MathController::class, 'update']);
+Route::post('/math/update/title/{id}',[MathController::class, 'updateTitle']);
+Route::post('/math/update/question/{id}',[MathController::class, 'updateQuestion']);
+Route::post('/math/update/answer/{id}',[MathController::class, 'updateAnswer']);
+Route::post('/math/delete/img/{id}',[MathController::class, 'delImg']);
+Route::post('/math/upload/{id}',[MathController::class, 'upload']);
+Route::post('/math/question-create',[MathController::class, 'create']);
+Route::delete('/math/question-delete/{id}',[MathController::class, 'delete']);
+
+// 人生劇場アプリ
+Route::get('/life',[LifeController::class, 'index']);
+
 // お天気アプリ
-Route::get('/sky',[WeatherController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
+// Route::get('/sky',[WeatherController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
+Route::get('/sky',[WeatherController::class, 'index']);
 
 // 掲示板アプリ
 Route::get('board', [BoardController::class, 'index'])->middleware('auth:sanctum', config('jetstream.auth_session'), 'verified',);
