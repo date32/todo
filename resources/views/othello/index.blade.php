@@ -7,6 +7,6 @@
     <title>Othello</title>
 </head>
 <body>
-    <p>オセロaa</p>
+    <p>オセロaaa</p>
 </body>
 </html>
