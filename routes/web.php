@@ -22,6 +22,8 @@ Route::get('/', function () {
     ]);
 });
 
+
+//てすとおお
 // 管理者
 Route::get('/admin', [UserController::class, 'index'])->name('admin');
 
