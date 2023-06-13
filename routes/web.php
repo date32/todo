@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 
-//てすとおお
+//てすと
 // 管理者
 Route::get('/admin', [UserController::class, 'index'])->name('admin');
 
